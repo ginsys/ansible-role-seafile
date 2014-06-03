@@ -1,0 +1,36 @@
+---
+- name: provision configuration files
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  template:
+    src:                '{{ item.src }}'
+    dest:               '{{ item.dest }}'
+    owner:              '{{ seafile_user }}'
+    group:              '{{ seafile_user }}'
+    mode:               0640
+  with_items:
+    - src:      'ccnet/ccnet.conf'
+      dest:     '{{ seafile_ccnet_dir }}/'
+    - src:      'seafile-data/seafile.conf'
+      dest:     '{{ seafile_data_dir }}/'
+    - src:      'ccnet/seafile.ini'
+      dest:     '{{ seafile_ccnet_dir }}/'
+    - src:      'conf/seafdav.conf'
+      dest:     '{{ seafile_conf_dir }}/'
+    - src:      '{{ SEAFILE_SEAHUB_SETTINGS_F }}'
+      dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
+  notify:              restart_seafile
+
+- name: provision media folders
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  shell: >
+    creates={{ item.dest }}
+    rsync -a {{ item.src }}/ {{ item.dest }}/
+  with_items:
+    - src:              '{{ SEAFILE_AVATAR_SRC }}'
+      dest:             '{{ SEAFILE_AVATAR_DEST }}'
+    - src:              '{{ SEAFILE_DOCS_SRC }}'
+      dest:             '{{ SEAFILE_DOCS_DEST }}'
+  notify:              restart_seafile
+
