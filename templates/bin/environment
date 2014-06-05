@@ -1,0 +1,7 @@
+## {{ansible_managed}}
+
+{% for var in SEAFILE_ENVIRONMENT|dictsort %}
+export {{ var[0] }}="{{ var[1] }}"
+{% endfor %}
+
+## {{ansible_managed}}
