@@ -3,7 +3,7 @@
   assert:
     that:
       - ansible_distribution in SEAFILE_SUPPORTED_DISTRIBUTIONS
-      - seafile_install_version in SEAFILE_SUPPORTED_VERSIONS
+      - '".".join(seafile_install_version.split(".")[0:2]) in SEAFILE_SUPPORTED_VERSIONS'
       - seafile_backend in SEAFILE_SUPPORTED_BACKENDS
       - ansible_python_version.startswith('2.6') or ansible_python_version.startswith('2.7')
 
