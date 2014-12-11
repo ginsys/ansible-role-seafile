@@ -17,7 +17,7 @@
     path:               '{{ item }}'
     owner:              '{{ seafile_user }}'
     group:              '{{ seafile_user }}'
-    mode:               0750
+    mode:               0755
     state:              directory
   with_items:
     - '{{ seafile_org_dir                   }}'
