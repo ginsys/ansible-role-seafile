@@ -16,6 +16,7 @@ seafile_distrib_dir:        '{{ seafile_org_dir + "/seafile-server-" + seafile_i
 seafile_ccnet_dir:          '{{ seafile_org_dir + "/ccnet" }}'
 seafile_conf_dir:           '{{ seafile_org_dir + "/conf" }}'
 seafile_latest_dir:         '{{ seafile_org_dir + "/seafile-server-latest" }}'
+seafile_latest2_dir:        '{{ seafile_org_dir + "/latest" }}'
 seafile_data_dir:           '{{ seafile_org_dir + "/seafile-data" }}'
 seafile_seahubdata_dir:     '{{ seafile_org_dir + "/seahub-data" }}'
 seafile_mylib_dir:            '{{ seafile_org_dir + "/lib" }}'

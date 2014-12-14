@@ -21,6 +21,47 @@
       dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
   notify:              restart_seafile
 
+- name:       provision and link customisation directories
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  file:
+    dest:     '{{ item.dest }}'
+    state:    '{{ item.state }}'
+    src:      '{{ item.src }}'
+    owner:    '{{ seafile_user }}'
+    group:    '{{ seafile_user }}'
+    mode:     0755
+    force:    yes
+  with_items:
+  - dest:     '{{ seafile_seahubdata_dir }}'
+    src:
+    state:    directory
+  - dest:     '{{ seafile_seahubdata_dir }}/avatars'
+    src:
+    state:    directory
+  - dest:     '{{ seafile_seahubdata_dir }}/custom'
+    src:
+    state:    directory
+  - dest:     '{{ seafile_seahubdata_dir }}/custom/templates'
+    src:
+    state:    directory
+  - src:      '{{ seafile_seahubdata_dir }}/custom'
+    dest:     '{{ seafile_latest_dir }}/seahub/media/custom'
+    state:    link
+  tags:       seafile_custom
+
+- name:       copy customisation files
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  copy:
+    src:              'files/seafile/custom'
+    dest:             '{{ seafile_seahubdata_dir }}/'
+    force:            yes
+    owner:            '{{ seafile_user }}'
+    group:            '{{ seafile_user }}'
+    mode:             0644
+    directory_mode:   0755
+
 - name: provision media folders
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'

@@ -51,8 +51,8 @@ SEAFILE_SECRET_KEYGEN:  'python {{ seafile_latest_dir }}/seahub/tools/secret_key
 SEAFILE_MANAGEPY:       'python {{ seafile_latest_dir }}/seahub/manage.py'
 SEAFILE_SEAHUB_SETTINGS_F:  'seahub_settings.py'
 SEAFILE_SEAHUB_SETTINGS:    '{{ seafile_org_dir }}/{{ SEAFILE_SEAHUB_SETTINGS_F }}'
-SEAFILE_AVATAR_SRC:     '{{ seafile_latest_dir }}/seahub/media/avatars'
-SEAFILE_AVATAR_DEST:    '{{ seafile_seahubdata_dir }}/avatars'
+SEAFILE_AVATAR_SRC:     '{{ seafile_seahubdata_dir }}/avatars'
+SEAFILE_AVATAR_DEST:    '{{ seafile_latest_dir }}/seahub/media/avatars'
 SEAFILE_DOCS_SRC:       '{{ seafile_latest_dir }}/seafile/docs'
 SEAFILE_DOCS_DEST:      '{{ seafile_data_dir }}/library-template'
 
