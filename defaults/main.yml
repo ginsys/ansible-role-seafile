@@ -64,6 +64,7 @@ seafile_session_expire_at_browser_close: false
 seafile_force_server_crypto: true
 seafile_logo_path:          # default none
 seafile_css_path:           # default none
+seafile_allowed_hosts:      # default none
 
 # network ports
 seafile_ccnet_port:         10001
