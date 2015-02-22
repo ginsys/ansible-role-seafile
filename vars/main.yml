@@ -29,6 +29,7 @@ DEPENDENCY_PACKAGES_APT:
 - python-mysqldb
 - sqlite
 - rsync
+- sudo
 DEPENDENCY_PACKAGES_RPM:
 - python2.6-setuptools
 - python2.6-simplejson
@@ -36,6 +37,7 @@ DEPENDENCY_PACKAGES_RPM:
 - MYSQL-python
 - sqlite
 - rsync
+- sudo
 
 SEAFILE_ENVIRONMENT:
   LD_LIBRARY_PATH: >
