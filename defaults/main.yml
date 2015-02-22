@@ -1,6 +1,6 @@
 ---
 # version to install
-seafile_install_version:    '3.1.2'
+seafile_install_version:    '4.0.6'
 
 # distribution download info
 seafile_tarball_url_base:   https://bitbucket.org/haiwen/seafile/downloads/
