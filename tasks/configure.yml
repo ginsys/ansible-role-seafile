@@ -21,6 +21,11 @@
       dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
   notify:              restart_seafile
 
+- name:       move the default avatars directory out of the way
+  command:    >
+              creates='{{ seafile_latest_dir }}/seahub/media/avatars.ori'
+              mv '{{ seafile_latest_dir }}/seahub/media/avatars' '{{ seafile_latest_dir }}/seahub/media/avatars.ori'
+
 - name:       provision and link customisation directories
   sudo:       yes
   sudo_user:  '{{ seafile_user }}'
@@ -33,21 +38,14 @@
     mode:     0755
     force:    yes
   with_items:
-  - dest:     '{{ seafile_seahubdata_dir }}'
-    src:
-    state:    directory
-  - dest:     '{{ seafile_seahubdata_dir }}/avatars'
-    src:
-    state:    directory
-  - dest:     '{{ seafile_seahubdata_dir }}/custom'
-    src:
-    state:    directory
-  - dest:     '{{ seafile_seahubdata_dir }}/custom/templates'
-    src:
-    state:    directory
+  - src:      '{{ seafile_seahubdata_dir }}/avatars'
+    dest:     '{{ seafile_latest_dir }}/seahub/media/avatars'
+    state:    link
+    force:    true
   - src:      '{{ seafile_seahubdata_dir }}/custom'
     dest:     '{{ seafile_latest_dir }}/seahub/media/custom'
     state:    link
+    force:    true
   tags:       seafile_custom
 
 - name:       copy customisation files
