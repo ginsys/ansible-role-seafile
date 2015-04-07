@@ -59,6 +59,7 @@
     group:            '{{ seafile_user }}'
     mode:             0644
     directory_mode:   0755
+  ignore_errors: true
 
 - name: provision media folders
   sudo:                 yes
