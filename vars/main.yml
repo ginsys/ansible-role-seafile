@@ -1,4 +1,5 @@
 ---
+min_ansible_version: 1.9
 SEAFILE_SUPPORTED_DISTRIBUTIONS:
   - 'Ubuntu'
   - 'Debian'
