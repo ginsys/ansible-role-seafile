@@ -19,7 +19,6 @@
     dest:               '{{ seafile_org_dir }}'
     creates:            '{{ seafile_distrib_dir }}'
   notify:               restart_seafile
-  always_run:           true
 
 - name: link latest release
   sudo:                 yes

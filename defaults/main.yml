@@ -1,9 +1,9 @@
 ---
 # version to install
-seafile_install_version:    '4.0.6'
+seafile_install_version:    '4.2.2'
 
 # distribution download info
-seafile_tarball_url_base:   https://bitbucket.org/haiwen/seafile/downloads/
+seafile_tarball_url_base:   https://bintray.com/artifact/download/seafile-org/seafile/
 seafile_tarball_name:       seafile-server_{{ seafile_install_version }}_{{ ansible_architecture|replace("_","-")}}.tar.gz
 seafile_tarball_url:        '{{ seafile_tarball_url_base + seafile_tarball_name }}'
 
