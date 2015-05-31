@@ -22,55 +22,35 @@
   notify:              restart_seafile
 
 - name:       move the default avatars directory out of the way
-  command:    >
-              creates='{{ seafile_latest_dir }}/seahub/media/avatars.ori'
-              mv '{{ seafile_latest_dir }}/seahub/media/avatars' '{{ seafile_latest_dir }}/seahub/media/avatars.ori'
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  shell:      >
+              ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
+              test -e $ORI && (test -L $ORI || mv -v $ORI ${ORI}.ori)
+  register:     _shell
+  changed_when: _shell.stdout_lines|length > 0
 
-- name:       provision and link customisation directories
+- name:       link media folders with local custom data
   sudo:       yes
   sudo_user:  '{{ seafile_user }}'
   file:
-    dest:     '{{ item.dest }}'
-    state:    '{{ item.state }}'
-    src:      '{{ item.src }}'
+    src:      '{{ seafile_seahubdata_dir +"/"+ item }}'
+    dest:     '{{ seafile_latest_dir +"/seahub/media/" + item }}'
     owner:    '{{ seafile_user }}'
     group:    '{{ seafile_user }}'
     mode:     0755
+    state:    link
     force:    yes
   with_items:
-  - src:      '{{ seafile_seahubdata_dir }}/avatars'
-    dest:     '{{ seafile_latest_dir }}/seahub/media/avatars'
-    state:    link
-    force:    true
-  - src:      '{{ seafile_seahubdata_dir }}/custom'
-    dest:     '{{ seafile_latest_dir }}/seahub/media/custom'
-    state:    link
-    force:    true
-  tags:       seafile_custom
+  - avatars
+  - custom
 
-- name:       copy customisation files
+- name:       copy default avatars to custom data dir
   sudo:       yes
   sudo_user:  '{{ seafile_user }}'
-  copy:
-    src:              'files/seafile/custom'
-    dest:             '{{ seafile_seahubdata_dir }}/'
-    force:            yes
-    owner:            '{{ seafile_user }}'
-    group:            '{{ seafile_user }}'
-    mode:             0644
-    directory_mode:   0755
-  ignore_errors: true
-
-- name: provision media folders
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
-  shell: >
-    creates={{ item.dest }}
-    rsync -a {{ item.src }}/ {{ item.dest }}/
-  with_items:
-    - src:              '{{ SEAFILE_AVATAR_SRC }}'
-      dest:             '{{ SEAFILE_AVATAR_DEST }}'
-    - src:              '{{ SEAFILE_DOCS_SRC }}'
-      dest:             '{{ SEAFILE_DOCS_DEST }}'
-  notify:              restart_seafile
+  shell:      |
+              ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
+              rsync -ai ${ORI}.ori/ $ORI/
+  register:     _shell
+  changed_when: _shell.stdout_lines|length > 0
 
