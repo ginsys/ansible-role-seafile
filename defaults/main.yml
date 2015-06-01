@@ -24,6 +24,9 @@ seafile_server_name:        '{{ seafile_org_name }}'
 seafile_ip_or_domain:       seacloud.cc
 seafile_service_url:        http://{{ seafile_ip_or_domain }}:{{ seafile_fastcgi_port }}
 
+# the path to a local directory relative to your playbook, that holds
+# customisation files to be copied to
+# seafile-server-latest/seahub/media/custom/
 #seafile_custom_files_path:  custom # see tasks/configure.yml
 
 # when using an ssl terminating reverse proxy, you'' want to set this to:

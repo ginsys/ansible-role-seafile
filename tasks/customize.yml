@@ -35,12 +35,16 @@
 
 - name: create custom files dirs
   file:
-    path:   '{{ item }}'
+    dest:   '{{ seafile_seahubdata_dir +"/custom/" + item }}'
     state:  directory
     owner:  '{{ seafile_user }}'
     group:  '{{ seafile_user }}'
     mode:   0755
   with_items: seafile_custom_files_path_dirs.stdout_lines
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
 
 - name: copy custom files
   copy:
@@ -50,4 +54,8 @@
     group:  '{{ seafile_user }}'
     mode:   0644
   with_items: seafile_custom_files_path_files.stdout_lines
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
 
