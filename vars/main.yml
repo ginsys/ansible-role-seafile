@@ -42,10 +42,8 @@ DEPENDENCY_PACKAGES_RPM:
 - sudo
 
 SEAFILE_ENVIRONMENT:
-  LD_LIBRARY_PATH: >
-    {{ seafile_latest_dir }}/seafile/lib/:{{ seafile_latest_dir }}/seafile/lib64:${LD_LIBRARY_PATH}
-  PYTHONPATH: >
-    {{ seafile_latest_dir }}/seafile/lib/python2.6/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.6/site-packages:{{ seafile_latest_dir }}/seahub/thirdpart:{{ seafile_latest_dir }}/seafile/lib/python2.7/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.7/site-packages:{{ ansible_env.PYTHONPATH | default('') }}
+  LD_LIBRARY_PATH:      '{{ seafile_latest_dir }}/seafile/lib/:{{ seafile_latest_dir }}/seafile/lib64:${LD_LIBRARY_PATH}'
+  PYTHONPATH:           '{{ seafile_latest_dir }}/seafile/lib/python2.6/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.6/site-packages:{{ seafile_latest_dir }}/seahub/thirdpart:{{ seafile_latest_dir }}/seafile/lib/python2.7/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.7/site-packages:{{ ansible_env.PYTHONPATH | default("") }}'
   CCNET_CONF_DIR:       '{{ seafile_ccnet_dir }}'
   SEAFILE_CONF_DIR:     '{{ seafile_data_dir }}'
 
