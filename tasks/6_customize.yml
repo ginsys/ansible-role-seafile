@@ -2,7 +2,7 @@
 # handle custom files outside the role upload
 
 - name:       check for custom files folder
-  sudo:       false
+  become:     false
   local_action:
     module:     stat
     path:       '{{ seafile_custom_files_path }}'
@@ -11,7 +11,7 @@
   register:   seafile_custom_files_folder_found
 
 - name:           list custom dirs
-  sudo:           false
+  become:         false
   local_action:   command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type d
   changed_when:   false
   always_run:     yes
@@ -22,7 +22,7 @@
   - seafile_custom_files_folder_found.stat.isdir
 
 - name:           list custom files
-  sudo:           false
+  become:         false
   local_action:   command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type f
   changed_when:   false
   always_run:     yes

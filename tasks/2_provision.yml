@@ -12,8 +12,8 @@
     uid:                '{{ seafile_user_uid|default(omit) }}'
 
 - name: provision directories
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
+  become:               yes
+  become_user:          '{{ seafile_user }}'
   file:
     path:               '{{ item }}'
     owner:              '{{ seafile_user }}'

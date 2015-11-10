@@ -1,7 +1,7 @@
 ---
 - name: provision configuration files
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
+  become:               yes
+  become_user:          '{{ seafile_user }}'
   template:
     src:                '{{ item.src }}'
     dest:               '{{ item.dest }}'
@@ -22,8 +22,8 @@
   notify:               restart_seafile
 
 - name:       move the default avatars directory out of the way
-  sudo:       yes
-  sudo_user:  '{{ seafile_user }}'
+  become:      yes
+  become_user: '{{ seafile_user }}'
   shell:      >
               ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
               test -e $ORI && (test -L $ORI || mv -v $ORI ${ORI}.ori)
@@ -31,8 +31,8 @@
   changed_when: _shell.stdout_lines|length > 0
 
 - name:       link media folders with local custom data
-  sudo:       yes
-  sudo_user:  '{{ seafile_user }}'
+  become:      yes
+  become_user: '{{ seafile_user }}'
   file:
     src:      '{{ seafile_seahubdata_dir +"/"+ item }}'
     dest:     '{{ seafile_latest_dir +"/seahub/media/" + item }}'
@@ -46,8 +46,8 @@
   - custom
 
 - name:       copy default avatars to custom data dir
-  sudo:       yes
-  sudo_user:  '{{ seafile_user }}'
+  become:      yes
+  become_user: '{{ seafile_user }}'
   shell:      |
               ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
               rsync -ai ${ORI}.ori/ $ORI/

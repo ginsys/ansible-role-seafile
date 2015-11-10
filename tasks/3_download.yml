@@ -5,8 +5,8 @@
   when:                 seafile_install_version_beta
 
 - name:                 download release tarball
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
+  become:               yes
+  become_user:          '{{ seafile_user }}'
   get_url:
     url:                '{{ seafile_tarball_url }}'
     validate_certs:     no
@@ -17,8 +17,8 @@
   always_run:           true
 
 - name:                 untar tarball
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
+  become:               yes
+  become_user:          '{{ seafile_user }}'
   unarchive:
     copy:               no
     src:                '{{ seafile_tarball_dl.dest }}'
@@ -40,8 +40,8 @@
   when:                 item.stat.exists
 
 - name: link latest release
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
+  become:               yes
+  become_user:          '{{ seafile_user }}'
   file:
     src:                '{{ seafile_distrib_dir }}'
     dest:               '{{ item }}'
