@@ -9,6 +9,7 @@
     home:               '{{ seafile_user_home }}'
     move_home:          yes
     system:             yes
+    uid:                '{{ seafile_user_uid|default(omit) }}'
 
 - name: provision directories
   sudo:                 yes

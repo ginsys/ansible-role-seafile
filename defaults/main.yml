@@ -10,6 +10,9 @@ seafile_tarball_url:        '{{ seafile_tarball_url_base + seafile_tarball_name 
 # names, files and directory locations
 seafile_user:               seafile
 seafile_user_home:          /home/seafile
+# defining seafile_user_uid will explicitly set the given value
+# leaving it undefined will fallback on adduser picking the value
+#seafile_user_uid:           999
 seafile_org_name:           Seafile
 seafile_org_dir:            '{{ seafile_user_home +"/"+ seafile_org_name|lower }}'
 seafile_distrib_dir:        '{{ seafile_org_dir + "/seafile-server-" + seafile_install_version }}'
