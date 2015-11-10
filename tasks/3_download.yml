@@ -1,5 +1,10 @@
 ---
-- name: download release tarball
+- name:                 Install seafile beta
+  set_fact:
+    seafile_tarball_url:  '{{ seafile_tarball_url|replace(".tar.gz", "-beta.tar.gz") }}'
+  when:                 seafile_install_version_beta
+
+- name:                 download release tarball
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   get_url:
@@ -9,10 +14,9 @@
   register:             seafile_tarball_dl
   notify:
                         - stop_seafile
-                        - restart_seafile
   always_run:           true
 
-- name: untar tarball
+- name:                 untar tarball
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   unarchive:
@@ -23,9 +27,17 @@
   register:             seafile_tarball_dl
   notify:
                         - stop_seafile
-                        - restart_seafile
 
-- meta: flush_handlers
+- name:                 check if we already have init scripts
+  stat:
+    path:               /etc/init.d/{{ item.name }}
+  with_items:           SEAFILE_INIT_SCRIPTS
+  when:                 ansible_os_family in item.os_family
+  register:             _seafile_init_script_present
+
+- meta:                 flush_handlers
+  with_items:           _seafile_init_script_present.results
+  when:                 item.stat.exists
 
 - name: link latest release
   sudo:                 yes
@@ -40,3 +52,4 @@
   with_items:
                         - '{{ seafile_latest_dir }}'
                         - '{{ seafile_latest2_dir }}'
+  register:             seafile_new_release

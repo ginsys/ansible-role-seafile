@@ -9,17 +9,17 @@
     group:              '{{ seafile_user }}'
     mode:               0640
   with_items:
-    - src:      'ccnet/ccnet.conf'
-      dest:     '{{ seafile_ccnet_dir }}/'
-    - src:      'seafile-data/seafile.conf'
-      dest:     '{{ seafile_data_dir }}/'
-    - src:      'ccnet/seafile.ini'
-      dest:     '{{ seafile_ccnet_dir }}/'
-    - src:      'conf/seafdav.conf'
-      dest:     '{{ seafile_conf_dir }}/'
-    - src:      '{{ SEAFILE_SEAHUB_SETTINGS_F }}'
-      dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
-  notify:              restart_seafile
+    - src:              'ccnet/seafile.ini'
+      dest:             '{{ seafile_ccnet_dir }}/'
+    - src:              'conf/ccnet.conf'
+      dest:             '{{ seafile_conf_dir }}/'
+    - src:              'conf/seafile.conf'
+      dest:             '{{ seafile_conf_dir }}/'
+    - src:              'conf/seafdav.conf'
+      dest:             '{{ seafile_conf_dir }}/'
+    - src:              'conf/seahub_settings.py'
+      dest:             '{{ seafile_conf_dir }}/'
+  notify:               restart_seafile
 
 - name:       move the default avatars directory out of the way
   sudo:       yes

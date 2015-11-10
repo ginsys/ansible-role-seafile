@@ -1,5 +1,5 @@
 ---
-- name: provision admin user creation script
+- name:                 provision admin user creation script
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   template:
@@ -7,7 +7,7 @@
     dest:                   '{{ seafile_latest_dir }}/init_admin.py'
     mode:                   0700
 
-- name: provision admin user
+- name:                 provision admin user
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   command:              /usr/bin/env python {{ seafile_latest_dir }}/init_admin.py

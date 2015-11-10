@@ -1,5 +1,5 @@
 ---
-- name: provision database
+- name:                 provision database
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   shell:                '{{ SEAFILE_MANAGEPY }} syncdb'

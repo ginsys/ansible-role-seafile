@@ -8,7 +8,6 @@
     dest:                   '{{ seafile_latest_dir }}/environment'
     mode:                   0664
 
-
 # prepare ccnet config
 - name:                 generate ccnet config
   sudo:                 yes
@@ -47,8 +46,6 @@
                         {{ SEAFILE_SECRET_KEYGEN }} > {{ seafile_mylib_dir }}/seahub_settings_secret_key
                         creates={{ seafile_mylib_dir }}/seahub_settings_secret_key
   environment:          '{{ SEAFILE_ENVIRONMENT }}'
-
-
 
 - name:                 register seahub_settings secret key
   sudo:                 yes

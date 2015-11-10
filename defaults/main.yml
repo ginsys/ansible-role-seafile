@@ -1,6 +1,7 @@
 ---
 # version to install
-seafile_install_version:    '4.2.2'
+seafile_install_version:    '5.0.0'
+seafile_install_version_beta: False
 
 # distribution download info
 seafile_tarball_url_base:   https://bintray.com/artifact/download/seafile-org/seafile/

@@ -1,38 +1,45 @@
 ---
-- include:  prerequisites.yml
+- include:  1_prerequisites.yml
   tags:
   - seafile_prerequisites
 
-- include:  provision.yml
+- include:  2_provision.yml
   tags:
   - seafile_provision
 
-- include:  download.yml
+- include:  3_download.yml
   tags:
   - seafile_download
 
-- include:  preconfigure.yml
+- include:  4_preconfigure.yml
   tags:
   - seafile_preconfigure
   - seafile_configure
 
-- include:  configure.yml
+- include:  5_configure.yml
   tags:
   - seafile_configure
 
-- include:  customize.yml
+- include:  6_customize.yml
   tags:
   - seafile_customize
 
-- include:  database.yml
+- include:  7_database.yml
   tags:
   - seafile_database
 
-- include:  init_admin.yml
+- include:  8_init_admin.yml
   tags:
   - seafile_init_admin
 
-- include:  init.yml
+- include:  9_init.yml
   tags:
   - seafile_init
 
+- debug:
+    msg: >
+            If you upgraded seafile, please verify if you need to run some upgrade scripts manually.
+            Have a look at the scripts in {{ seafile_latest_dir }}/upgrade
+            and see http://manual.seafile.com/deploy/upgrade.html
+  tags:
+  - seafile
