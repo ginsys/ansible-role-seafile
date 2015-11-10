@@ -1,13 +1,4 @@
 ---
-# handy environment file to be sourced when doing things manually
-- name:                 provision environment source file
-  become:               yes
-  become_user:          '{{ seafile_user }}'
-  template:
-    src:                    bin/environment
-    dest:                   '{{ seafile_latest_dir }}/environment'
-    mode:                   0664
-
 # prepare ccnet config
 - name:                 generate ccnet config
   become:               yes

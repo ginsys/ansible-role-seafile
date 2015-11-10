@@ -1,5 +1,5 @@
 ---
-- name: provision configuration files
+- name: provision configuration files and scripts
   become:               yes
   become_user:          '{{ seafile_user }}'
   template:
@@ -7,8 +7,9 @@
     dest:               '{{ item.dest }}'
     owner:              '{{ seafile_user }}'
     group:              '{{ seafile_user }}'
-    mode:               0640
+    mode:               '{{ item.exec | default(false) | ternary(0750,0640) }}'
   with_items:
+    # configuration files
     - src:              'ccnet/seafile.ini'
       dest:             '{{ seafile_ccnet_dir }}/'
     - src:              'conf/ccnet.conf'
@@ -19,7 +20,33 @@
       dest:             '{{ seafile_conf_dir }}/'
     - src:              'conf/seahub_settings.py'
       dest:             '{{ seafile_conf_dir }}/'
+    # handy environment file to be sourced when doing things manually
+    - src:              'bin/environment'
+      dest:             '{{ seafile_org_dir + "/bin/" }}'
+    # perform a garbage collection maintenance
+    - src:              'bin/garbage-collect'
+      dest:             '{{ seafile_org_dir + "/bin/" }}'
+      exec:             true
   notify:               restart_seafile
+
+- name:       provision crontabs
+  cron:
+    name:       '{{ item.name }}'
+    user:       '{{ seafile_user }}'
+    job:        '{{ seafile_org_dir + "/bin/" + item.script }}'
+    minute:     '{{ item.min | default(omit) }}'
+    hour:       '{{ item.hou | default(omit) }}'
+    day:        '{{ item.dom | default(omit) }}'
+    month:      '{{ item.mon | default(omit) }}'
+    weekday:    '{{ item.dow | default(omit) }}'
+    state:      '{{ item.enabled | default(False) | ternary("present", "absent") }}'
+  with_items:
+    - name:       Weekly Garbage Collection
+      script:     garbage-collect
+      min:        0
+      hou:        5
+      dow:        7
+      enabled:    '{{ seafile_cron_gc_enabled }}'
 
 - name:       move the default avatars directory out of the way
   become:      yes

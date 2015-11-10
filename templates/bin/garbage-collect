@@ -1,0 +1,15 @@
+#!/bin/bash
+
+on_exit() {
+    sleep 5
+    {{ seafile_latest_dir }}/seafile.sh start
+}
+trap on_exit TERM KILL EXIT
+
+{{ seafile_latest_dir }}/seafile.sh stop
+if [ $? -eq 0 ]
+then
+    sleep 30
+    {{ seafile_latest_dir }}/seaf-gc.sh
+fi
+

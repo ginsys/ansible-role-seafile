@@ -22,6 +22,7 @@
     state:              directory
   with_items:
     - '{{ seafile_org_dir                     }}'
+    - '{{ seafile_org_dir + "/bin"            }}'
     - '{{ seafile_org_dir + "/installed"      }}'
     - '{{ seafile_ccnet_dir                   }}'
     - '{{ seafile_conf_dir                    }}'

@@ -104,3 +104,9 @@ seafile_db_name:
   ccnet:                    'ccnet'
   seafile:                  'seafile'
   seahub:                   'seahub'
+
+## cron jobs
+# a weekly job to perform garbage collection
+seafile_cron_gc_enabled:    false
+
+
