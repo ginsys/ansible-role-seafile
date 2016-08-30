@@ -4,7 +4,7 @@
 
 ### BEGIN INIT INFO
 # Provides:          seafile-server
-# Required-Start:    $local_fs $remote_fs $network{% if seafile_backend == 'mysql' %} mysql{% endif %}
+# Required-Start:    $local_fs $remote_fs $network{% if seafile_backend == 'mysql' and (seafile_db_host == 'localhost' or seafile_db_host == '127.0.0.1' or seafile_db_host == '::1') %} mysql{% endif %}
 
 # Required-Stop:     $local_fs
 # Default-Start:     2 3 4 5
