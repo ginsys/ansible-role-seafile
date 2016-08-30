@@ -92,7 +92,9 @@ seafile_webdav_path:        '/'
 
 # seahub settings
 seafile_seahub_admin_email:     admin@{{ seafile_ip_or_domain }}
-seafile_seahub_admin_password:  pepikoki
+
+# No default, this needs to be set explicitly.
+#seafile_seahub_admin_password:  
 
 # database settings
 seafile_backend:            'sqlite'
