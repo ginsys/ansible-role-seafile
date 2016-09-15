@@ -111,4 +111,10 @@ seafile_db_name:
 # a weekly job to perform garbage collection
 seafile_cron_gc_enabled:    false
 
-
+## ldap
+#seafile_ldap:
+#  host: 'ldap://127.0.0.1'
+#  base: 'ou=people,dc=example,dc=com'
+#  user_dn: 'cn=seafile,ou=services,dc=example,dc=com'
+#  password: 'cleartext-password'
+#  login_attr: mail
