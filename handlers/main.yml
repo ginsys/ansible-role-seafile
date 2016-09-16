@@ -13,7 +13,7 @@
     state:      started
     sleep:      5
   when:         ansible_os_family in item.os_family
-  with_items:   SEAFILE_INIT_SCRIPTS
+  with_items:   '{{SEAFILE_INIT_SCRIPTS}}'
 
 - name:         stop_seafile
   service:
@@ -21,5 +21,5 @@
     state:      stopped
     sleep:      5
   when:         ansible_os_family in item.os_family
-  with_items:   SEAFILE_INIT_SCRIPTS
+  with_items:   '{{SEAFILE_INIT_SCRIPTS}}'
 
