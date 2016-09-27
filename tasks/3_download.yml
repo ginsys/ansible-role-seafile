@@ -12,8 +12,6 @@
     validate_certs:     no
     dest:               '{{ seafile_org_dir + "/installed" }}'
   register:             seafile_tarball_dl
-  notify:
-                        - stop_seafile
   always_run:           true
 
 - name:                 untar tarball
@@ -24,9 +22,7 @@
     src:                '{{ seafile_tarball_dl.dest }}'
     dest:               '{{ seafile_org_dir }}'
     creates:            '{{ seafile_distrib_dir }}'
-  register:             seafile_tarball_dl
-  notify:
-                        - stop_seafile
+  register:             seafile_tarball_ex
 
 - name:                 check if we already have init scripts
   stat:
@@ -35,9 +31,19 @@
   when:                 ansible_os_family in item.os_family
   register:             _seafile_init_script_present
 
-- meta:                 flush_handlers
-  with_items:           _seafile_init_script_present.results
-  when:                 item.stat.exists
+- name:                 stop_seafile
+  service:
+    name:               '{{ item.0.name }}'
+    state:              stopped
+    sleep:              5
+  with_nested:
+                        - '{{SEAFILE_INIT_SCRIPTS}}'
+                        - _seafile_init_script_present.results
+  when:
+                        - ansible_os_family in item.0.os_family
+                        - not item.1|skipped
+                        - item.1.stat.exists
+                        - seafile_tarball_dl|changed or seafile_tarball_ex|changed
 
 - name: link latest release
   become:               yes
