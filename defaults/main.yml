@@ -100,6 +100,7 @@ seafile_seahub_admin_email:     admin@{{ seafile_ip_or_domain }}
 seafile_backend:            'sqlite'
 # the next settings are not used for sqlite
 seafile_db_host:            '127.0.0.1'
+seafile_db_port:            '3306'
 seafile_db_user:            'seafile'
 seafile_db_pass:            's3cr3t'
 seafile_db_name:

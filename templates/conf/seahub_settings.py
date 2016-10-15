@@ -98,13 +98,11 @@ BRANDING_CSS = '{{ seafile_css_path }}'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.{{ seafile_backend }}',
+        'NAME' : '{{ seafile_db_name.seahub }}',
         'USER' : '{{ seafile_db_user }}',
         'PASSWORD' : '{{ seafile_db_pass }}',
-        'NAME' : '{{ seafile_db_name.seahub }}',
         'HOST' : '{{ seafile_db_host }}',
-        'OPTIONS': {
-            "init_command": "SET storage_engine=INNODB",
-        }
+        'PORT' : '{{ seafile_db_port }}'
     }
 }
 
