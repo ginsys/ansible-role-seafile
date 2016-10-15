@@ -13,6 +13,8 @@
   apt:
     name:               '{{ item }}'
     state:              latest
+    update_cache:       True
+    cache_valid_time:   300
   with_items:   DEPENDENCY_PACKAGES_APT
   when:         ansible_pkg_mgr == 'apt'
 
