@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Seafile hub
+After=network.target seafile.service
+
+[Service]
+# change start to start-fastcgi if you want to run fastcgi
+ExecStart={{ seafile_org_dir }}/seafile-server-latest/seahub.sh start
+ExecStop={{ seafile_org_dir }}/seafile-server-latest/seahub.sh stop
+User={{ seafile_user }}
+Group=seafile
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
