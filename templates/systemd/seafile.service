@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Seafile
+After=network.target {% if seafile_backend != 'sqlite' and seafile_db_host == '127.0.0.1' %} {{ seafile_backend }}.service {% endif %}
+
+[Service]
+Type=oneshot
+ExecStart={{ seafile_org_dir }}/seafile-server-latest/seafile.sh start
+ExecStop={{ seafile_org_dir }}/seafile-server-latest/seafile.sh stop
+RemainAfterExit=yes
+User={{ seafile_user }}
+Group=seafile
+
+[Install]
+WantedBy=multi-user.target

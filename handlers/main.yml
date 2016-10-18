@@ -1,4 +1,7 @@
 ---
+- name: systemd_reload
+  command: systemctl daemon-reload
+
 - name:         restart_seafile
   service:
     name:       '{{ item.name }}'

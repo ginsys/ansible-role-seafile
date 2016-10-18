@@ -9,16 +9,26 @@
   when:         ansible_os_family == "RedHat"
   notify:       restart_seafile
 
-- name:         provision init script
+- name:         provision sysvinit script
   template:
     src:        init/{{ item.name }}.initd.{{ ansible_os_family }}
     dest:       /etc/init.d/{{ item.name }}
     owner:      root
     group:      root
     mode:       0750
-  when:         ansible_os_family in item.os_family
+  when:         ansible_os_family in item.os_family and ansible_service_mgr == "sysvinit"
   with_items:   SEAFILE_INIT_SCRIPTS
   notify:       restart_seafile
+
+- name:         provision systemd services
+  template:
+    src:        systemd/{{ item.name }}.service
+    dest:       /lib/systemd/system/
+  when:         ansible_service_mgr == "systemd"
+  with_items:   SEAFILE_INIT_SCRIPTS
+  notify:
+  - systemd_reload
+  - restart_seafile
 
 - name:         provision upstart script
   template:
@@ -27,7 +37,7 @@
     owner:      root
     group:      root
     mode:       0644
-  when:         ansible_distribution == "Ubuntu"
+  when:         ansible_service_mgr == "upstart"
   notify:       restart_seafile
 
 - name:         enable init services
