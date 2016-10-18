@@ -16,7 +16,7 @@
     owner:      root
     group:      root
     mode:       0750
-  when:         ansible_service_mgr == "sysvinit"
+  when:         ansible_os_family in item.os_family and ansible_service_mgr == "sysvinit"
   with_items:   SEAFILE_INIT_SCRIPTS
   notify:       restart_seafile
 
