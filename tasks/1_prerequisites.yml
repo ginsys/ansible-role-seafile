@@ -13,20 +13,20 @@
   apt:
     name:               '{{ item }}'
     state:              latest
-  with_items:   DEPENDENCY_PACKAGES_APT
+  with_items:   '{{ DEPENDENCY_PACKAGES_APT }}'
   when:         ansible_pkg_mgr == 'apt'
 
 - name:         install dependencies - rpm + python 2.6
   yum:
     name:               '{{ item }}'
     state:              latest
-  with_items:   DEPENDENCY_PACKAGES_RPM
+  with_items:   '{{ DEPENDENCY_PACKAGES_RPM }}'
   when:         ansible_pkg_mgr == 'yum' and ansible_python_version.startswith('2.6')
 
 - name:         install dependencies - rpm + python 2.7
   yum:
     name:               '{{ item }}'
     state:              latest
-  with_items:   DEPENDENCY_PACKAGES_RPM
+  with_items:   '{{ DEPENDENCY_PACKAGES_RPM }}'
   when:         ansible_pkg_mgr == 'yum' and ansible_python_version.startswith('2.7')
 
