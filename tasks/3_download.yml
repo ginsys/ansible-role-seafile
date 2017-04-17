@@ -27,7 +27,7 @@
 - name:                 check if we already have init scripts
   stat:
     path:               /etc/init.d/{{ item.name }}
-  with_items:           SEAFILE_INIT_SCRIPTS
+  with_items:           '{{ SEAFILE_INIT_SCRIPTS }}'
   when:                 ansible_os_family in item.os_family
   register:             _seafile_init_script_present
 
@@ -37,8 +37,8 @@
     state:              stopped
     sleep:              5
   with_nested:
-                        - '{{SEAFILE_INIT_SCRIPTS}}'
-                        - _seafile_init_script_present.results
+                        - '{{ SEAFILE_INIT_SCRIPTS }}'
+                        - '{{ _seafile_init_script_present.results }}'
   when:
                         - ansible_os_family in item.0.os_family
                         - not item.1|skipped

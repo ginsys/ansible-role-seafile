@@ -11,21 +11,21 @@
 
 - name:         provision sysvinit script
   template:
-    src:        init/{{ item.name }}.initd.{{ ansible_os_family }}
-    dest:       /etc/init.d/{{ item.name }}
+    src:        'init/{{ item.name }}.initd.{{ ansible_os_family }}'
+    dest:       '/etc/init.d/{{ item.name }}'
     owner:      root
     group:      root
     mode:       0750
   when:         ansible_os_family in item.os_family and ansible_service_mgr == "sysvinit"
-  with_items:   SEAFILE_INIT_SCRIPTS
+  with_items:   '{{ SEAFILE_INIT_SCRIPTS }}'
   notify:       restart_seafile
 
 - name:         provision systemd services
   template:
-    src:        systemd/{{ item.name }}.service
-    dest:       /lib/systemd/system/
+    src:        'systemd/{{ item.name }}.service'
+    dest:       '/lib/systemd/system/'
   when:         ansible_service_mgr == "systemd"
-  with_items:   SEAFILE_INIT_SCRIPTS
+  with_items:   '{{ SEAFILE_INIT_SCRIPTS }}'
   notify:
   - systemd_reload
   - restart_seafile
@@ -45,6 +45,6 @@
     name:       '{{ item.name }}'
     enabled:    yes
   when:         ansible_os_family in item.os_family
-  with_items:   SEAFILE_INIT_SCRIPTS
+  with_items:   '{{ SEAFILE_INIT_SCRIPTS }}'
   notify:       restart_seafile
 
