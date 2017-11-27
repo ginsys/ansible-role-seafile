@@ -39,7 +39,7 @@
     owner:        '{{ seafile_user }}'
     group:        '{{ seafile_user }}'
     mode:         0755
-  with_items:   seafile_custom_files_path_dirs.stdout_lines
+  with_items:     '{{ seafile_custom_files_path_dirs.stdout_lines }}'
   when:
   - not seafile_custom_files_folder_found|skipped
   - seafile_custom_files_folder_found.stat.exists
@@ -52,7 +52,7 @@
     owner:        '{{ seafile_user }}'
     group:        '{{ seafile_user }}'
     mode:         0644
-  with_items:   seafile_custom_files_path_files.stdout_lines
+  with_items:     '{{ seafile_custom_files_path_files.stdout_lines }}'
   when:
   - not seafile_custom_files_folder_found|skipped
   - seafile_custom_files_folder_found.stat.exists

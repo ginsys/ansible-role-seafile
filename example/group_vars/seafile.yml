@@ -1,6 +1,6 @@
 ---
 # version to install
-seafile_install_version:    '6.0.4'
+seafile_install_version:    '6.2.3'
 
 # names, files and directory locations
 seafile_user:               seafile

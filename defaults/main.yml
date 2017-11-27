@@ -1,10 +1,10 @@
 ---
 # version to install
-seafile_install_version:    '5.0.0'
+seafile_install_version:    '6.2.3'
 seafile_install_version_beta: False
 
 # distribution download info
-seafile_tarball_url_base:   https://bintray.com/artifact/download/seafile-org/seafile/
+seafile_tarball_url_base:   https://download.seadrive.org/
 seafile_tarball_name:       seafile-server_{{ seafile_install_version }}_{{ ansible_architecture|replace("_","-")}}.tar.gz
 seafile_tarball_url:        '{{ seafile_tarball_url_base + seafile_tarball_name }}'
 
@@ -23,7 +23,7 @@ seafile_latest_dir:         '{{ seafile_org_dir + "/seafile-server-latest" }}'
 seafile_latest2_dir:        '{{ seafile_org_dir + "/latest" }}'
 seafile_data_dir:           '{{ seafile_org_dir + "/seafile-data" }}'
 seafile_seahubdata_dir:     '{{ seafile_org_dir + "/seahub-data" }}'
-seafile_mylib_dir:            '{{ seafile_org_dir + "/lib" }}'
+seafile_mylib_dir:          '{{ seafile_org_dir + "/lib" }}'
 seafile_server_name:        '{{ seafile_org_name }}'
 seafile_ip_or_domain:       seacloud.cc
 seafile_service_url:        http://{{ seafile_ip_or_domain }}:{{ seafile_fastcgi_port }}
@@ -94,7 +94,7 @@ seafile_webdav_path:        '/'
 seafile_seahub_admin_email:     admin@{{ seafile_ip_or_domain }}
 
 # No default, this needs to be set explicitly.
-#seafile_seahub_admin_password:  
+#seafile_seahub_admin_password:
 
 # database settings
 seafile_backend:            'sqlite'
