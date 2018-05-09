@@ -13,7 +13,7 @@
   become_user:          '{{ seafile_user }}'
   shell:                grep ID {{ seafile_mylib_dir }}/ccnet/ccnet.conf | cut -d= -f2
   register:             _seafile_ccnet_ID
-  always_run:           true
+  check_mode:           no
   changed_when:         false
   failed_when:          _seafile_ccnet_ID.stdout == "" or _seafile_ccnet_ID.stderr != ""
 
@@ -43,7 +43,7 @@
   become_user:          '{{ seafile_user }}'
   command:              cat {{ seafile_mylib_dir }}/seahub_settings_secret_key
   register:             _seafile_seahub_settings_secret_key
-  always_run:           true
+  check_mode:           no
   changed_when:         false
   failed_when:          _seafile_seahub_settings_secret_key.stdout == "" or _seafile_seahub_settings_secret_key.stderr != ""
 
