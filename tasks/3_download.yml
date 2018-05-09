@@ -12,7 +12,7 @@
     validate_certs:     no
     dest:               '{{ seafile_org_dir + "/installed" }}'
   register:             seafile_tarball_dl
-  always_run:           true
+  check_mode:           no
 
 - name:                 untar tarball
   become:               yes
@@ -41,9 +41,9 @@
                         - '{{ _seafile_init_script_present.results }}'
   when:
                         - ansible_os_family in item.0.os_family
-                        - not item.1|skipped
+                        - not item.1 is skipped
                         - item.1.stat.exists
-                        - seafile_tarball_dl|changed or seafile_tarball_ex|changed
+                        - seafile_tarball_dl is changed or seafile_tarball_ex is changed
 
 - name: link latest release
   become:               yes

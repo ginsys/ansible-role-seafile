@@ -14,10 +14,10 @@
   become:         false
   local_action:   command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type d
   changed_when:   false
-  always_run:     yes
+  check_mode:     no
   register:       seafile_custom_files_path_dirs
   when:
-  - not seafile_custom_files_folder_found|skipped
+  - not seafile_custom_files_folder_found is skipped
   - seafile_custom_files_folder_found.stat.exists
   - seafile_custom_files_folder_found.stat.isdir
 
@@ -25,10 +25,10 @@
   become:         false
   local_action:   command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type f
   changed_when:   false
-  always_run:     yes
+  check_mode:     no
   register:       seafile_custom_files_path_files
   when:
-  - not seafile_custom_files_folder_found|skipped
+  - not seafile_custom_files_folder_found is skipped
   - seafile_custom_files_folder_found.stat.exists
   - seafile_custom_files_folder_found.stat.isdir
 
@@ -41,7 +41,7 @@
     mode:         0755
   with_items:     '{{ seafile_custom_files_path_dirs.stdout_lines }}'
   when:
-  - not seafile_custom_files_folder_found|skipped
+  - not seafile_custom_files_folder_found is skipped
   - seafile_custom_files_folder_found.stat.exists
   - seafile_custom_files_folder_found.stat.isdir
 
@@ -54,7 +54,7 @@
     mode:         0644
   with_items:     '{{ seafile_custom_files_path_files.stdout_lines }}'
   when:
-  - not seafile_custom_files_folder_found|skipped
+  - not seafile_custom_files_folder_found is skipped
   - seafile_custom_files_folder_found.stat.exists
   - seafile_custom_files_folder_found.stat.isdir
 
