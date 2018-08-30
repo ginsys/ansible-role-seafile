@@ -81,7 +81,8 @@ seafile_ccnet_port:         10001
 seafile_seafile_port:       12001
 seafile_httpserver_port:    8082
 seafile_webdav_port:        8080
-# fastcgi
+# fastcgi is no longer supported since version 6.3
+# see https://manual.seafile.com/changelog/server-changelog.html#63
 seafile_fastcgi_enabled:    false
 seafile_fastcgi_port:       8000
 

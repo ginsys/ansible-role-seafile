@@ -32,3 +32,15 @@
   with_items:   '{{ DEPENDENCY_PACKAGES_RPM }}'
   when:         ansible_pkg_mgr == 'yum' and ansible_python_version.startswith('2.7')
 
+- name:         check if deprecated features are in use
+  assert:
+    that:
+      # For ansible 2.5 and up:
+      #- 'not(seafile_fastcgi_enabled and seafile_install_version is version("6.3", ">="))'
+      - 'not(seafile_fastcgi_enabled and seafile_install_version is version_compare("6.3", ">="))'
+    msg: >
+      seafile_fastcgi_enabled is not supported since seafile version 6.3.
+      If you are using a reverse proxy, you will need to change fastcgi_pass to proxy_pass in your server configuration,
+      have a look at the example in example/group_vars/seafile.yml.
+      More information at https://manual.seafile.com/changelog/server-changelog.html#63
+      and https://manual.seafile.com/deploy/deploy_with_nginx.html
