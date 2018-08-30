@@ -15,6 +15,7 @@ def main():
         check_init_admin.create_admin('{{ seafile_seahub_admin_email }}', '{{ seafile_seahub_admin_password }}')
     else:
         print "changed=false"
+    subprocess.call(["{{ seafile_latest_dir }}/seafile.sh", "stop"])
 
 if __name__ == '__main__':
     try:
