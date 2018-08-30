@@ -91,7 +91,7 @@ seafile_gunicorn_port:      '{{ seafile_fastcgi_port }}'
 # webdav settings
 seafile_webdav_enabled:     false
 seafile_webdav_fastcgi:     false
-seafile_webdav_path:        '/'
+seafile_webdav_path:        '/dav'
 
 # seahub settings
 seafile_seahub_admin_email:     admin@{{ seafile_ip_or_domain }}
