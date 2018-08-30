@@ -9,7 +9,6 @@
   become_user:          '{{ seafile_user }}'
   get_url:
     url:                '{{ seafile_tarball_url }}'
-    validate_certs:     no
     dest:               '{{ seafile_org_dir + "/installed" }}'
   register:             seafile_tarball_dl
   check_mode:           no
