@@ -1,6 +1,6 @@
 ---
 # version to install
-seafile_install_version:    '6.2.3'
+seafile_install_version:    '6.3.2'
 seafile_install_version_beta: False
 
 # distribution download info
