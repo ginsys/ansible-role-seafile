@@ -85,6 +85,8 @@ seafile_webdav_port:        8080
 # see https://manual.seafile.com/changelog/server-changelog.html#63
 seafile_fastcgi_enabled:    false
 seafile_fastcgi_port:       8000
+# seahub behind reverse proxy
+seafile_gunicorn_port:      '{{ seafile_fastcgi_port }}'
 
 # webdav settings
 seafile_webdav_enabled:     false
