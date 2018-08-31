@@ -20,6 +20,8 @@
       dest:             '{{ seafile_conf_dir }}/'
     - src:              'conf/seahub_settings.py'
       dest:             '{{ seafile_conf_dir }}/'
+    - src:              'conf/gunicorn.conf'
+      dest:             '{{ seafile_conf_dir }}/'
     # handy environment file to be sourced when doing things manually
     - src:              'bin/environment'
       dest:             '{{ seafile_org_dir + "/bin/" }}'

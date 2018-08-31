@@ -25,4 +25,3 @@
     sleep:      5
   when:         ansible_os_family in item.os_family
   with_items:   '{{ SEAFILE_INIT_SCRIPTS }}'
-

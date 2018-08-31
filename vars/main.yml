@@ -10,6 +10,7 @@ SEAFILE_SUPPORTED_VERSIONS:
   - '6.0'
   - '6.1'
   - '6.2'
+  - '6.3'
 SEAFILE_SUPPORTED_BACKENDS:
   - 'sqlite'
   - 'mysql'
@@ -28,8 +29,9 @@ SEAFILE_INIT_SCRIPTS:
 DEPENDENCY_PACKAGES_APT:
 - python-setuptools
 - python-simplejson
-- python-imaging
+- python-pil
 - python-mysqldb
+- python-requests
 - sqlite
 - rsync
 - sudo

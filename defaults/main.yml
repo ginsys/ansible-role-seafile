@@ -1,6 +1,6 @@
 ---
 # version to install
-seafile_install_version:    '6.2.3'
+seafile_install_version:    '6.3.2'
 seafile_install_version_beta: False
 
 # distribution download info
@@ -81,14 +81,17 @@ seafile_ccnet_port:         10001
 seafile_seafile_port:       12001
 seafile_httpserver_port:    8082
 seafile_webdav_port:        8080
-# fastcgi
+# fastcgi is no longer supported since version 6.3
+# see https://manual.seafile.com/changelog/server-changelog.html#63
 seafile_fastcgi_enabled:    false
 seafile_fastcgi_port:       8000
+# seahub behind reverse proxy
+seafile_gunicorn_port:      '{{ seafile_fastcgi_port }}'
 
 # webdav settings
 seafile_webdav_enabled:     false
 seafile_webdav_fastcgi:     false
-seafile_webdav_path:        '/'
+seafile_webdav_path:        '/dav'
 
 # seahub settings
 seafile_seahub_admin_email:     admin@{{ seafile_ip_or_domain }}
