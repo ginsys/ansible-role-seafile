@@ -5,8 +5,6 @@ SEAFILE_SUPPORTED_DISTRIBUTIONS:
   - 'Debian'
   - 'CentOS'
 SEAFILE_SUPPORTED_VERSIONS:
-  - '5.0'
-  - '5.1'
   - '6.0'
   - '6.1'
   - '6.2'

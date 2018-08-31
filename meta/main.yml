@@ -6,18 +6,34 @@ galaxy_info:
     Homepage http://seafile.com
   company: ginsys.eu
   license: GPLv3
-  min_ansible_version: 1.9
+  min_ansible_version: 2.5
+  github_branch: stable
   platforms:
   - name: EL
     versions:
     - 6
+    - 7
   - name: Ubuntu
     versions:
-    - trusty
+    - xenial
+    - bionic
   - name: Debian
     versions:
     - jessie
-  categories:
-  - web
+    - stretch
+    - buster
+  - galaxy_tags:
+    - seafile
+    - web
+    - cloud
+    - python
+    - django
+    - html
+    - files
+    - fileserver
+    - privacy
+    - sharing
+    - gpl3
+    - linux
 dependencies: []
 
